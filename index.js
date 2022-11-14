@@ -31,10 +31,18 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   
   1. What is the difference between counter1 and counter2?
   
+  The count variable is stored locally inside the counterMaker function that defines counter1, counter2 increments a global count variable.
+
   2. Which of the two uses a closure? How can you tell?
   
+  They both are since counter and counter2 both access variables in their "lexical environment" i.e. non-local variables.
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+    Counter 1 seems more contained, if your are concerned about global variable proliferation -as in a large file- then this might be a better option.
+    Counter2 seems simpler, so it may have a performance benefit, and a readability benefit.
+
 */
 
 // counter1 code
@@ -44,8 +52,8 @@ function counterMaker() {
    return count++;
   }
 }
-
 const counter1 = counterMaker();
+//why does adding () to console.log(counter1) return the value?
 
 // counter2 code
 let count = 0;
@@ -53,7 +61,7 @@ let count = 0;
 function counter2() {
   return count++;
 }
-
+//console.log(counter1());
 
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
 Use the inning function below to do the following:
@@ -64,9 +72,11 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  var runs = Math.floor(Math.random()*3);  
+  return runs;
 }
+//console.log(inning());
 
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
@@ -83,10 +93,25 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(gameInnings){
+  let awayTeam = 0;
+  let homeTeam = 0;
+  
+  for (let i = 0; i < gameInnings; i++){
+    awayTeam = awayTeam + inning();
+    homeTeam = homeTeam + inning();
+    
+  }
+
+  let boxScore = {
+    Away: awayTeam,
+    Home: homeTeam
+  };
+
+  return boxScore;
 }
 
+console.log(finalScore(inning(), 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
