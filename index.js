@@ -93,14 +93,12 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(gameInnings){
+function finalScore(fn, gameInnings){
   let awayTeam = 0;
   let homeTeam = 0;
-  
   for (let i = 0; i < gameInnings; i++){
-    awayTeam = awayTeam + inning();
-    homeTeam = homeTeam + inning();
-    
+    awayTeam = awayTeam + fn();
+    homeTeam = homeTeam + fn();
   }
 
   let boxScore = {
@@ -111,7 +109,7 @@ function finalScore(gameInnings){
   return boxScore;
 }
 
-console.log(finalScore(inning(), 9));
+console.log(finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -126,10 +124,17 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningFunction) {
+  
+let scoreboard = {
+Away: inningFunction(),
+Home: inningFunction()
+}
+  return scoreboard;
 
 }
+
+console.log(getInningScore(inning));
 
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
